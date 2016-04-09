@@ -64,19 +64,21 @@ public class HandlerReadClientInfo extends Thread {
                 if (null != clientInfo) {
                     str = "c2s [" + ("".equals(clientInfo) ? "-null-" : clientInfo) + "]";
                     System.out.println(str);
-                    String l = str.substring(str.indexOf("num=") + 4, str.indexOf("&"));
-                    // System.out.println(l);
-                    if (null != outToClient) {
-                        mBean.id = Long.parseLong(l);
-                        str = new Gson().toJson(mBean);
+
+                    if (str.contains("LANG_H")) {
+                        String l = str.substring(str.indexOf("num=") + 4, str.indexOf("&"));
+                        if (null != outToClient) {
+                            mBean.id = Long.parseLong(l);
+                            str = new Gson().toJson(mBean);
+                            System.out.println("To JSON --> " + str);
+                            outToClient.println(str);
+                        }
+                    } else if (str.contains("LANG_MSG")) {
+                        mSocketMegBean.id = UI_ID + System.currentTimeMillis() % 20;
+                        str = new Gson().toJson(mSocketMegBean);
                         System.out.println("To JSON --> " + str);
                         outToClient.println(str);
-                        // System.out.println("outToClient println(" + str + ")");
-                    }
-
-
-
-                    if ("bye".equals(clientInfo)) {
+                    } else if ("bye".equals(clientInfo)) {
                         flag = false;
                     }
                 }
