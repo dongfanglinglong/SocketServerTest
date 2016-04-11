@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SocketServerTest.iml" filepath="$PROJECT_DIR$/SocketServerTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SocketServerTest.iml" filepath="$PROJECT_DIR$/.idea/modules/SocketServerTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SocketServerTest_main.iml" filepath="$PROJECT_DIR$/.idea/modules/SocketServerTest_main.iml" group="SocketServerTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SocketServerTest_test.iml" filepath="$PROJECT_DIR$/.idea/modules/SocketServerTest_test.iml" group="SocketServerTest" />
     </modules>
   </component>
 </project>
