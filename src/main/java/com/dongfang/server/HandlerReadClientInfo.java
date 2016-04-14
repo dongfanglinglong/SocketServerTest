@@ -51,6 +51,13 @@ public class HandlerReadClientInfo extends Thread {
 
     }
 
+    /**
+     * SOCKET 心跳数据
+     */
+    private static final String HEART_ACTION = "LANG_H";
+
+    public static final String SOCKET_ACTION_TEST = "TEST";
+    public static final String SOCKET_ACTION_FEEDBACK = "FEEDBACK";
 
     @Override
     public void run() {
@@ -65,7 +72,7 @@ public class HandlerReadClientInfo extends Thread {
                     str = "c2s [" + ("".equals(clientInfo) ? "-null-" : clientInfo) + "]";
                     System.out.println(str);
 
-                    if (str.contains("LANG_H")) {
+                    if (str.contains(HEART_ACTION)) {
                         String l = str.substring(str.indexOf("num=") + 4, str.indexOf("&"));
                         if (null != outToClient) {
                             mBean.id = Long.parseLong(l);
@@ -83,7 +90,7 @@ public class HandlerReadClientInfo extends Thread {
                                 outToClient.println(str);
                             }
                         }
-                    } else if (str.contains("LANG_MSG")) {
+                    } else if (str.contains(SOCKET_ACTION_TEST)) {
                         mBean.id = UI_ID + System.currentTimeMillis() % 20;
                         mBean.data = new Gson().toJson(mSocketMegBean);
                         str = new Gson().toJson(mBean);
