@@ -1,6 +1,7 @@
 package com.dongfang;
 
 import com.dongfang.bean.BaseBean;
+import com.dongfang.bean.HeartMsgBean;
 import com.google.gson.Gson;
 
 /**
@@ -27,8 +28,39 @@ public class Test {
 //        System.out.println(new Gson().toJson(bean));
 
 
-        String s = "{\"id\":777002,\"msg\":\"ok\",\"data\":\"{\\\"msgId\\\":777002,\\\"mstType\\\":1,\\\"dataArrary\\\":[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\"]}\"}";
+//        String s = "{\"id\":777002,\"msg\":\"ok\",\"data\":\"{\\\"msgId\\\":777002,\\\"mstType\\\":1,\\\"dataArrary\\\":[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\"]}\"}";
+//
+//        System.out.println(new Gson().fromJson(s,BaseBean.class));
 
-        System.out.println(new Gson().fromJson(s,BaseBean.class));
+//        System.out.println(lastRemaining(1,3));
+//        System.out.println(lastRemaining(2,3));
+//        System.out.println(lastRemaining(3,3));
+//        System.out.println(lastRemaining(4,3));
+//        System.out.println(lastRemaining(5,3));
+//        System.out.println(lastRemaining(6,3));
+//        System.out.println(lastRemaining(7,3));
+//        System.out.println(lastRemaining(8,3));
+
+
+        System.out.println(HeartMsgBean.class.isAssignableFrom(BaseBean.class));
+        System.out.println(BaseBean.class.isAssignableFrom(HeartMsgBean.class));
+
+    }
+
+
+
+
+
+
+
+    public static int lastRemaining(int n, int m){
+        if(n < 1 || m < 1){
+            return -1;
+        }
+        int last = 0;
+        for(int i = 2; i <= n; i++){
+            last = (last + m) % i;
+        }
+        return last+1;
     }
 }
