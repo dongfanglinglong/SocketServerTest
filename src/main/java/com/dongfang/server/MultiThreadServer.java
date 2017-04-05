@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class MultiThreadServer {
 
     public static void main(String[] args) throws Exception {
-        ServerSocket server = new ServerSocket(20011);
+        ServerSocket server = new ServerSocket(9451);
         Socket client = null;
         boolean flag = true;
 
@@ -27,7 +27,7 @@ public class MultiThreadServer {
             client = server.accept();
             System.out.println("客户端向服务器端发起了连接请求,且连接成功");
             new HandlerReadCMDInfo(client, "HANDLER CMD S2C :");
-            new HandlerReadClientInfo(client);
+            //new HandlerReadClientInfo(client);
             init();
             Observable.just(client)
                     .flatMap(new Func1<Socket, Observable<?>>() {
@@ -38,15 +38,16 @@ public class MultiThreadServer {
                                 mSocketMegBean.msgId = mBean.id;
                                 mBean.data = new Gson().toJson(mSocketMegBean);
                                 String str = new Gson().toJson(mBean);
-                                System.out.println("To JSON --> " + str);
-                                outToClient.println(str);
+                                System.out.println("To JSON --> " + "{\"errNo\":\"0000\",\"errMsg\":\"成功\",\"data\":{\"id\":\"6195085004316672\",\"sequence\":\"10\",\"workStatus\":0},\"rspType\":0}");
+                                outToClient.println("{\"errNo\":\"0000\",\"errMsg\":\"成功\",\"data\":{\"id\":\"6195085004316672\",\"sequence\":\"10\",\"workStatus\":0},\"rspType\":0}");
+                                outToClient.flush();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                             return Observable.just(socket);
                         }
                     })
-                    .delay(3, TimeUnit.SECONDS)
+                    .delay(5, TimeUnit.SECONDS)
                     .repeat()
                     .subscribe();
 

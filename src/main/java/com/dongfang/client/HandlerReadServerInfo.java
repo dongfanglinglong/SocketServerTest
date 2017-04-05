@@ -32,7 +32,6 @@ public class HandlerReadServerInfo extends Thread {
         try {
             boolean flag = true;
             while (flag) {
-                //从服务器端接收数据有个时间限制（系统自设，也可以自己设置），超过了这个时间，便会抛出该异常
                 String echo = buf.readLine();
                 System.out.println(null == echo || "".equals(echo) ? "-null-" : echo);
                 if (null != echo && echo.contains("bye")) {
